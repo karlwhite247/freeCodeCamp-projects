@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<title>CodePen - Javascript Calculator </title>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Graduate');
+
+* {
+    padding: 0;
+    margin: 0; 
+}
+
+html{
+   height:100%;
+  background-image: url(https://ssaavic.com.au/wp-content/uploads/2016/09/AdobeStock_69287640.jpeg); 
+  background-position: center center;
+			background-repeat:  no-repeat;
+			background-attachment: fixed;
+			background-size:  cover;
+  font-family: 'Graduate', cursive;
+}
+
+.calc-block{  
+  width: 300px;
+  height: 430px;
+  background-color: #364a7d;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
+ -webkit-box-shadow:   inset 16px 15px 10px -10px rgba(84,95,107,1),inset -14px 4px 101px -10px rgba(84,95,107,1);
+ -moz-box-shadow: -15px -4px 74px -2px rgba(0,0,0,0.65),
+  inset 0px 0px 0px 1px rgba(0,0,0,0.0);                
+ box-shadow: -15px -4px 74px -2px rgba(0,0,0,0.65),
+              inset 1px 0px 120px 30px rgba(0,0,0,0.34);
+}
+
+.top-block{
+  border-radius: 15px 15px 0px 0px;
+  background-color: #364a7d;
+  padding-bottom: 10px;
+  -webkit-box-shadow:   inset 16px 15px 10px -10px rgba(84,95,107,1),inset -14px 4px 101px -10px rgba(84,95,107,1);
+ -moz-box-shadow: -15px -4px 74px -2px rgba(0,0,0,0.65),
+  inset 0px 0px 0px 1px rgba(0,0,0,0.0);                
+ box-shadow: -15px -4px 74px -2px rgba(0,0,0,0.65),
+              inset 1px 0px 120px 30px rgba(0,0,0,0.34);
+}
+
+.top-block .title {
+  color: #ecf0f1;
+  padding-top: 8px;
+}
+
+.title-block{ 
+  text-align: center;
+  font-size: 25px;
+}
+
+.output-block {
+  background-color: #c3c5b1;
+  border: 5px solid #5b656f;
+  width: 90%;
+  height: 80px;
+  margin: auto;
+  border-radius: 15px;
+  margin: 10px 10px 10px 10px;
+ 
+}
+
+.result p{
+  text-align: right;
+  font-size: 45px;
+  padding-right: 5px;
+}
+
+.history p{
+  text-align: right;
+  font-size: 20px;
+  padding-right: 5px;
+  color:#8e9394; 
+}
+
+button{
+  border: none;
+  height: 40px;
+  width: 52px;
+  margin: 8px 0px 0px 15px;
+  background-color: #6d7a8a;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 25px;
+  font-family: 'Graduate', cursive;
+  -webkit-box-shadow: 0 20px 0 0 #586575, inset 0px -42px 68px -28px rgba(161,183,209,1);
+  box-shadow: 0 4px 0 0 #586575,
+  inset 0px -32px 10px -28px rgba(161,183,209,1); 
+  -moz-box-shadow: inset 0px -42px 68px -28px rgba(161,183,209,1);
+}
+
+.red{
+  background-color: #df4928;
+  -webkit-box-shadow: 0 20px 0 0 rgba(161,44,21,1), 
+                      inset 0px -42px 68px -28px rgba(230,94,67,1);
+  box-shadow: 0 4px 0 0 rgba(161,44,21,1),
+              inset 0px -32px 10px -28px rgba(230,94,67,1);
+  -moz-box-shadow: inset 0px -42px 68px -28px rgba(230,94,67,1);
+}
+
+.btn-zero{
+  position :relative;
+  width: 125px;
+}
+
+.btn-equal{
+  height: 88px;
+  position : absolute;
+}
+
+.hide{
+  display: none;
+}
+
+.footer{
+   text-align: center;
+   font-size: 11px;
+   padding-top: 10px;
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<html>
+<title>Free Code Camp Project 'JavaScript Calculator'</title>
+<style>
+      background-image: url(https://www.freeimageslive.co.uk/files/images010/desk_still_life.jpg);
+  </style>
+<body>
+<div class="wrapper">
+<div class="calc-block">
+<div class="top-block">
+<div class="title-block">
+<p class="title">kw Calculator</p>
+</div>
+<div class="output-block">
+<div class="result">
+<p>0</p>
+</div>
+<div class="history">
+<p>0</p>
+</div>
+</div>
+</div>
+<div id="buttons" class="buttons">
+<button class="red" value='ac'>AC</button>
+<button class="red" value='ce'>CE</button>
+<button class="" value="/">/</button>
+<button class="" value="*">X</button>
+<button class="digit" value="7">7</button>
+<button class="digit" value="8">8</button>
+<button class="digit" value="9">9</button>
+<button class="" value="-">-</button>
+<button class="digit" value="4">4</button>
+<button class="digit" value="5">5</button>
+<button class="digit" value="6">6</button>
+<button class="" value="+">+</button>
+<button class="digit" value="1">1</button>
+<button class="digit" value="2">2</button>
+<button class="digit" value="3">3</button>
+<button class="btn-equal" value="=">=</button>
+<button class="btn-zero" value="0">0</button>
+<button class="" value=".">.</button>
+<button class="hide">=</button>
+<p class="footer">Created by <a href="https://github.com/karlwhite247">Karl White</a></p>
+</div>
+</div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+<script src="js/index.js"></script>
+</body>
+</html>
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+<script id="rendered-js">
+$(document).ready(function () {
+
+  var input = ""; //holds value of the button pressed
+  var result = "0"; //field where the input is printed out
+  var history = "0"; //field showing the chain of arithmetic operation
+  var answer = ""; //holds answer of the arithmetic operation when "=" pressed
+  var MAX_LENGTH = 9; //max digits allowed in input screen
+  var MAX_LENGTH_HISTORY = 21; //max digits allowed in history screen
+
+  //click event adding chars to input field
+  $('button').click(function () {
+    //value of button pressed
+    input = $(this).attr("value");
+
+    checkHistory(); //check if limit reached prev step
+
+    //check if max reached
+    if (result.length <= MAX_LENGTH) {
+
+      //digit
+      if (!isNaN(input)) {
+
+        if (answer === "") {
+          isDigit(input);
+        } else if (!isNaN(answer)) {
+          var curr_input = input;
+          reset_all();
+          setResult(curr_input);
+          setHistory(curr_input);
+        }
+
+        //dot
+      } else if (input === ".") {
+        //is dot already in result?
+        checkDotExists();
+
+        //sign
+      } else if (input === "/" || input === "*" || input === "+" || input === "-") {
+
+        if (checkZeroResult() && history === "0") {//avoids sign to be the first input in chain
+
+          if (input === "-" || input === "+") {
+            setResult(input);
+            setHistory(input);
+          } else if (input === "/") {
+            setResult(input);
+            concHistory(input);
+          }
+
+          return;
+        }
+
+        if (answer === "") {
+          // check if sign already in result
+          if (!checkSign()) {
+            concHistory(input);
+            setResult(input);
+          } else if (input === "-" && (history.slice(-1) === "/" || history.slice(-1) === "*")) {
+            concHistory(input);
+            setResult(input);
+          }
+        } else if (!isNaN(answer)) {//
+          setHistory(answer + input);
+          setResult(input);
+          answer = "";
+        }
+
+        //equal sign
+      } else if (input === "=") {
+
+        try {
+          //answer = eval(history);
+          answer = Math.round(eval(history) * 100) / 100;
+
+          //check if answer exceeds the screen limits
+          if (answer.toString().length > MAX_LENGTH ||
+          (history + "=" + answer).length > MAX_LENGTH_HISTORY) {
+
+            limitReached();
+            return;
+          }
+          setResult(answer + "");
+          concHistory("=" + answer);
+
+        } catch (err) {
+          console.log(err.message + ": " + "Incomplete arithmetic operation.");
+        }
+
+        //ac - reset all
+      } else if (input === "ac") {
+        reset_all();
+
+        //ce - reset last input
+      } else if (input === "ce") {
+
+        if (answer !== "") {
+          reset_all();
+        } else {
+
+          if (history.length - result.length !== 0) {
+            history = history.substring(0, history.length - result.length);
+          } else {
+            history = "0";
+          }
+
+          setHistory(history);
+          setResult("0");
+        }
+      }
+
+    } else {;
+      limitReached();
+    }
+
+  });
+
+
+  //helper functions
+
+  //resets all fields if limit reached
+  function limitReached() {
+    result = "0";
+    history = "LIMIT REACHED";
+    answer = "";
+    setResult(result);
+    setHistory(history);
+  }
+
+
+  //process if digit is clicked
+  function isDigit(newDigit) {
+    if (checkZeroResult()) {
+      setResult(newDigit);
+
+      if (history !== "0") {
+        concHistory(newDigit);
+      } else {
+        setHistory(newDigit);
+      }
+
+    } else if (checkSign()) {
+      setResult(newDigit);
+      concHistory(newDigit);
+    } else {
+      concResult(newDigit);
+      concHistory(newDigit);
+    }
+  }
+
+  //check if result field only have a operation sign
+  function checkSign() {
+    return result.length === 1 && (result === "/" || result === "*" || result === "+" || result === "-");
+  }
+
+  //check if last character of history is a sign
+  function checkSignHistory() {
+    var lastChar = history.charAt(history.length - 1);
+    return lastChar === "/" || lastChar === "*" || lastChar === "+" || lastChar === "-";
+  }
+
+  //check if result field only contains "0"
+  function checkZeroResult() {
+    return result.length === 1 && result.charAt(0) === "0";
+  }
+
+  function checkHistory() {
+    if (history === "LIMIT REACHED") {
+      setHistory("0");
+    }
+  }
+
+
+  //check if dot was already inserted
+  function checkDotExists() {
+    //looks for dot in result
+    //yes does nothing & exit
+    //no adds result and history & exit  
+    if (result.indexOf(".") < 0) {
+      concResult(input);
+      concHistory(input);
+    }
+  }
+
+  //concatenates the new input to history field
+  function concHistory(newInput) {
+    history += newInput;
+    setHistory(history);
+  }
+
+  //concatenates the new input to result field 
+  function concResult(newInput) {
+    result += newInput;
+    setResult(result);
+
+  }
+
+  //reset all fields - AC button
+  function reset_all() {
+    input = "";
+    result = "0";
+    history = "0";
+    answer = "";
+    setResult("0");
+    setHistory("0");
+  }
+
+
+  function setResult(newResult) {
+    result = newResult;
+    $('.result > p').text(newResult);
+  }
+
+  function setHistory(newHistory) {
+    history = newHistory;
+    $('.history > p').text(newHistory);
+  }
+
+
+});
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>
